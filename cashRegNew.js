@@ -3,7 +3,6 @@ let coinValue = [ ['PENNY', 0.01], ['NICKEL',.05], ['DIME', .10], ['QUARTER', .2
 
 function checkCashRegister(price, cash, cid) {
   let cidChange = cid.map(x => x[1]); 
-  let args = arguments;
   let changeNeeded = cash - price;
   let totalInReg = getTotalInReg(cidChange);
   let changeDue = getChangeDue(changeNeeded,cidChange);
