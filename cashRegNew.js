@@ -2,17 +2,11 @@ let coinValue = [ ['PENNY', 0.01], ['NICKEL',.05], ['DIME', .10], ['QUARTER', .2
 ['ONE HUNDRED',100]];
 
 function checkCashRegister(price, cash, cid) {
-  let cidChange = cid.map(x => x[1]); 
   let changeNeeded = cash - price;
-  let totalInReg = getTotalInReg(cidChange);
+  let cidChange = cid.map(x => x[1]); 
+  let totalInReg = cidChange.reduce((acc,v) => acc + v).toFixed(2)
   let changeDue = getChangeDue(changeNeeded,cidChange);
   return getStatus(totalInReg, changeDue, cid,changeNeeded)
-}
-
-function getTotalInReg(cidChange){
-    let totalInReg = cidChange.reduce((acc,v) => acc + v)
-    totalInReg = totalInReg.toFixed(2);
-    return totalInReg;
 }
 
 function getChangeDue (changeNeeded,cidChange){
@@ -80,6 +74,7 @@ function addToChangeDue(changeDue,i){
 function getStatus(total,changeDue,cid,changeNeeded){
   let changeDueValue = changeDue.map(x => x[1]).reduce((acc,cv) => acc + cv);
   changeDueValue = changeDueValue.toFixed(2);
+  console.log(cid)
   let cashBack = {};
   
   if (total < changeNeeded || changeDueValue < changeNeeded){
@@ -107,7 +102,7 @@ Return {status: "CLOSED", change: [...]} with cash-in-drawer as the value for th
 
 Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins and bills, sorted in highest to lowest order, as the value of the change key.
 
-to do: work on the status closed one = if change in drawer is equal to what is due 
+to do: re-factor the getchangedue function so it doesnt need four variables 
 */
 
 
